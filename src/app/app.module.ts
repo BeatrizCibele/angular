@@ -27,10 +27,10 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { CurrencyPipe, registerLocaleData } from '@angular/common';
+registerLocaleData(localePt);
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import localePt from '@angular/common/locales/pt';
 import { ProductUpdateComponent } from './components/product/product-update/product-update.component';
-registerLocaleData(localePt);
-
 
 @NgModule({
   declarations: [
@@ -63,9 +63,10 @@ registerLocaleData(localePt);
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    CurrencyPipe
+    CurrencyPipe,
+    NgxMaskDirective, NgxMaskPipe
   ],
-  providers: [ { provide: LOCALE_ID, useValue: 'pt' }],
+  providers: [ { provide: LOCALE_ID, useValue: 'pt' }, provideNgxMask()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

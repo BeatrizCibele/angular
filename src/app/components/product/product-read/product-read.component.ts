@@ -7,6 +7,7 @@ import { MatTable } from '@angular/material/table';
 import { Observable, of as observableOf, merge } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DataSource } from '@angular/cdk/collections';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-read',
@@ -16,8 +17,9 @@ import { DataSource } from '@angular/cdk/collections';
 export class ProductReadComponent extends DataSource<Product> implements OnInit {
 
   products: Product[] = [];
+  product!: Product;
 
-  constructor(private productService: ProductService){
+  constructor(private productService: ProductService, private route: ActivatedRoute, private router: Router){
     super();
    }
 
@@ -25,6 +27,7 @@ export class ProductReadComponent extends DataSource<Product> implements OnInit 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<Product>;
   dataSource = this.products;
+  id: string | null = "";
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['id', 'name', 'price', 'actions'];
@@ -34,6 +37,16 @@ export class ProductReadComponent extends DataSource<Product> implements OnInit 
       this.products = data;
       console.log(this.products);
       
+    })
+
+    this.route.paramMap.subscribe(param => {this.id = param.get('id')});
+   
+  }
+
+  deleteProduct():void{
+    this.productService.delete(this.id!).subscribe(() =>{
+      this.productService.showMessage("Produto deletado com sucesso");
+      this.router.navigate(["/products"]);
     })
   }
 

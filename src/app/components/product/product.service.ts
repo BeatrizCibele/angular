@@ -21,12 +21,19 @@ export class ProductService {
     return this.http.get<Product[]>(this.baseURL);
   }
 
-  edit(product: Product): Observable<Product[]>{
-    return this.http.put<Product[]>(this.baseURL+product.id, product);
+  readById(id: string): Observable<Product>{
+    const url = `${this.baseURL}/${id}`;
+    return this.http.get<Product>(url);
   }
 
-  delete(product: Product): Observable<Product>{
-    return this.http.delete<Product>(this.baseURL+product.id);
+  update(product: Product): Observable<Product>{
+    const url = `${this.baseURL}/${product.id}`;
+    return this.http.put<Product>(url, product);
+  }
+
+  delete(id: string): Observable<Product>{
+    const url = `${this.baseURL}/${id}`
+    return this.http.delete<Product>(url);
   }
 
   showMessage(msg: string): void{
