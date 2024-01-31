@@ -27,9 +27,9 @@
               edit
             </i>
           </a>
-          <a routerLink="{{ row.id }}" class="delete" (click)="deleteProduct()">
+          <span class="delete" (click)="deleteProduct(row.id)">
             <i class="material-icons">delete</i>
-          </a>
+          </span>
         </td>
       </ng-container>
   

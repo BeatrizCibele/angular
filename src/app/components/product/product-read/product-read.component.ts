@@ -33,20 +33,23 @@ export class ProductReadComponent extends DataSource<Product> implements OnInit 
   displayedColumns = ['id', 'name', 'price', 'actions'];
 
   ngOnInit(): void {
+    this.readProduct();
+    
+  }
+  
+  readProduct(): void{
     this.productService.read().subscribe(data=>{
       this.products = data;
       console.log(this.products);
       
-    })
-
+    })  
     this.route.paramMap.subscribe(param => {this.id = param.get('id')});
-   
   }
 
-  deleteProduct():void{
-    this.productService.delete(this.id!).subscribe(() =>{
+  deleteProduct(id: string):void{
+    this.productService.delete(id).subscribe(() =>{    
       this.productService.showMessage("Produto deletado com sucesso");
-      this.router.navigate(["/products"]);
+      this.readProduct();
     })
   }
 
