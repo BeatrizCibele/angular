@@ -46,12 +46,12 @@ export class ProductReadComponent extends DataSource<Product> implements OnInit 
     this.route.paramMap.subscribe(param => {this.id = param.get('id')});
   }
 
-  deleteProduct(id: string):void{
-    this.productService.delete(id).subscribe(() =>{    
-      this.productService.showMessage("Produto deletado com sucesso");
-      this.readProduct();
-    })
-  }
+  // deleteProduct(id: number):void{
+  //   this.productService.delete(id).subscribe(() =>{    
+  //     this.productService.showMessage("Produto deletado com sucesso");
+  //     this.readProduct();
+  //   })
+  // }
 
   // edit(): void{
   //   console.log(this.productService.edit.subscribe());
